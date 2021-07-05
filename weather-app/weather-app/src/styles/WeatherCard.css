@@ -1,9 +1,12 @@
 .weather-card-wrapper {
-  border: solid black 1px;
+  border: solid rgb(199, 198, 198) 1px;
   display: flex;
   align-items: stretch;
   flex-direction: column;
   width: 700px;
+  margin: 10px;
+  border-radius: 2px;
+  font-family:'Courier New', Courier, monospace;
 }
 
 p, h2 {
@@ -16,5 +19,28 @@ p, h2 {
   align-items: stretch;
   background-color: #f1bb56;
   color: rgb(245, 245, 245);
+  opacity: 0.8;
 }
 
+.tomorrow-weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffdab9;
+  opacity: 0.8;
+}
+
+.after-tomorrow-weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffefd5;
+  opacity: 0.8;
+}
+
+.today-icon-wrapper {
+  font-size: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
