@@ -14,6 +14,7 @@ export default class SearchBar extends Component {
 
   handleSearch({ target }) {
     const { name, value } = target;
+
     this.setState(() => ({
       [name]: value,
     }))

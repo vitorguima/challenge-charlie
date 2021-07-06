@@ -8,35 +8,35 @@
   font-family:'Courier New', Courier, monospace;
 }
 
-p, h2 {
+.weather-card-wrapper p, h2 {
   padding: 5px;
+  font-weight: bolder;
 }
 
 .today-weather-wrapper {
   display: flex;
   justify-content: space-evenly;
   align-items: stretch;
-  background-color: #ff9f00;
   color: rgb(245, 245, 245);
-  opacity: 0.9;
+  background-color: rgba(255, 159, 0, 0.85);
 }
 
 .tomorrow-weather-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffa700;
+  background-color: rgba(255, 167, 0, 0.85);
   color: rgb(245, 245, 245);
-  opacity: 0.9;
+  font-weight: bold
 }
 
 .after-tomorrow-weather-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ffb300;
+  background-color: rgba(255, 179, 0, 0.85);
   color: rgb(245, 245, 245);
-  opacity: 0.9;
+  font-weight: bold;
 }
 
 .today-icon-wrapper {
