@@ -2,10 +2,22 @@ import React, { Component } from 'react'
 
 import WeatherCard from '../components/WeatherCard';
 
+import { dispatchGetBackground } from '../actions/index';
+
+import { connect } from 'react-redux';
+
 import '../styles/Home.css';
 
-export default class Home extends Component {
+class Home extends Component {
+  componentDidMount() {
+    const { dispatchGetBackground } = this.props;
+
+    dispatchGetBackground();
+  }
+
   render() {
+    const { loading, backgroundImage } = this.props;
+
     return (
       <main>
         <WeatherCard />
@@ -13,3 +25,14 @@ export default class Home extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  loading: state.HomeReducer.loading,
+  backgroundImage: state.HomeReducer.backgroundImage,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchGetBackground: () => dispatch(dispatchGetBackground()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
