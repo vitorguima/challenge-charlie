@@ -17,8 +17,14 @@ class Home extends Component {
 
   render() {
     const { loading, backgroundImage } = this.props;
-
-    return (
+    
+    if (!loading && backgroundImage) {
+      return (
+        <main style={ { backgroundImage: `url(${backgroundImage})` } }>
+          <WeatherCard />
+        </main>
+      )
+    } return (
       <main>
         <WeatherCard />
       </main>
