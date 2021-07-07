@@ -3,5 +3,6 @@ export const getLocationFromCoordinates = async (latitude, longitude) => {
   const URL = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${KEY}`;
   const response = await fetch(URL);
   const receivedData = await response.json();
-  console.log(receivedData.results[0].components.city);
+  const cityName = receivedData.results[0].components.city;
+  return cityName;
 }

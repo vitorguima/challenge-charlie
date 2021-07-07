@@ -30,13 +30,18 @@ export default class SearchBar extends Component {
       this.setState(() => ({
         latitude: coords.latitude.toFixed(6),
         longitude: coords.longitude.toFixed(6),
-      }))
+      }), async () => {
+        const { latitude, longitude } = this.state;
+        const currentLocation = await getLocationFromCoordinates(latitude, longitude);
+        this.setState(() => ({
+          location: currentLocation,
+        }))
+      })
     })
   }
 
   componentDidMount() {
     this.getGeoLocation();
-    getLocationFromCoordinates(-22.807892,-45.195476)
   }
 
   render() {
