@@ -8,6 +8,15 @@
   font-family:'Courier New', Courier, monospace;
 }
 
+/* .weather-card-wrapper.cold-weather {
+  --today-background-color: #fff;
+  --tomorrow-background-color: blue;
+}
+
+.weather-card-wrapper.warm-weather {
+  --today-background-color: #000
+} */
+
 .weather-card-wrapper p, h2 {
   padding: 5px;
   font-weight: bolder;
@@ -19,6 +28,7 @@
   align-items: stretch;
   color: rgb(245, 245, 245);
   background-color: rgba(255, 159, 0, 0.7);
+  /* background-color: var(--today-background-color); */
 }
 
 .tomorrow-weather-wrapper {

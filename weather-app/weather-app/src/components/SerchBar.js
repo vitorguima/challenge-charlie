@@ -43,13 +43,14 @@ export default class SearchBar extends Component {
   componentDidMount() {
     this.getGeoLocation();
   }
+  
 
   render() {
     const { location } = this.state;
 
     return (
       <div className="location-search-bar">
-        <form>
+        <form onSubmit={ (e) => {e.preventDefault(); console.log(location)} }>
           <input
             name="location"
             placeholder="Digite a cidade"
@@ -57,11 +58,11 @@ export default class SearchBar extends Component {
             value={ location }
             onChange={ this.handleSearch }
           />
-          <button
+          {/* <button
             type="button"
           >
             Buscar
-          </button>
+          </button> */}
         </form>
       </div>
     )
