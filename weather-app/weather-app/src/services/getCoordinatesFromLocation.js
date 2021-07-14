@@ -4,5 +4,6 @@ export const getCoordinatesFromLocation = async (location) => {
   const response = await fetch(URL);
   const receivedData = await response.json();
   const coordinates = await receivedData.results[0].geometry;
+  console.log(coordinates);
   return coordinates;
 }
