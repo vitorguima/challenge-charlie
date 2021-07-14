@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { getLocationFromCoordinates } from '../services/getLocationFromCoordinates';
 
+import { getCoordinatesFromLocation } from '../services/getCoordinatesFromLocation';
+
 import '../styles/SearchBar.css';
 
 export default class SearchBar extends Component {
@@ -50,13 +52,14 @@ export default class SearchBar extends Component {
 
     return (
       <div className="location-search-bar">
-        <form onSubmit={ (e) => {e.preventDefault(); console.log(location)} }>
+        <form onSubmit={ (e) => {e.preventDefault();  getCoordinatesFromLocation(location)} }>
           <input
             name="location"
             placeholder="Digite a cidade"
             type="text"
             value={ location }
             onChange={ this.handleSearch }
+            className="city-search-bar"
           />
           {/* <button
             type="button"
