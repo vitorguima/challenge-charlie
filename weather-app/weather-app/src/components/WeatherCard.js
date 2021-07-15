@@ -4,7 +4,7 @@ import '../styles/WeatherCard.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
-import SerchBar from './SerchBar';
+import SearchBar from './SearchBar';
 
 // criar componente para cada container: today, tomorrow, after-tomorrow;
 
@@ -12,7 +12,7 @@ export default class WeatherCard extends Component {
   render() {
     return (
       <div className="weather-card-wrapper cold-weather">
-        <SerchBar />
+        <SearchBar />
         <div className="today-weather-wrapper">
           <div className="today-icon-wrapper">
           <FontAwesomeIcon icon={ faSun } />

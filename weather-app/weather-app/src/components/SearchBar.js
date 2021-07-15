@@ -6,7 +6,11 @@ import { getCoordinatesFromLocation } from '../services/getCoordinatesFromLocati
 
 import '../styles/SearchBar.css';
 
-export default class SearchBar extends Component {
+import { dispatchGetForecast } from '../actions/index';
+
+import { connect } from 'react-redux';
+
+class SearchBar extends Component {
   constructor(props) {
     super(props)
 
@@ -14,9 +18,11 @@ export default class SearchBar extends Component {
       location: '',
       latitude: '',
       longitude: '',
+      forecast: false,
     }
     this.handleSearch = this.handleSearch.bind(this);
-    this.getGeoLocation = this.getGeoLocation.bind(this);
+    this.getGeoLocationFromUser = this.getGeoLocationFromUser.bind(this);
+    this.submitCitySearch = this.submitCitySearch.bind(this);
   }
 
   handleSearch({ target }) {
@@ -27,7 +33,8 @@ export default class SearchBar extends Component {
     }))
   }
 
-  getGeoLocation() {
+  getGeoLocationFromUser() {
+    const { dispatchForecast } = this.props
     navigator.geolocation.getCurrentPosition(({ coords }) => {
       this.setState(() => ({
         latitude: coords.latitude.toFixed(6),
@@ -37,13 +44,22 @@ export default class SearchBar extends Component {
         const currentLocation = await getLocationFromCoordinates(latitude, longitude);
         this.setState(() => ({
           location: currentLocation,
-        }))
+        }), () => dispatchForecast(latitude, longitude))
       })
     })
   }
 
-  componentDidMount() {
-    this.getGeoLocation();
+  async submitCitySearch() {
+    const { location } = this.state;
+    const { dispatchForecast } = this.props;
+    const coordinates = await getCoordinatesFromLocation(location);
+    const { lat, lng } = coordinates;
+    
+    dispatchForecast(lat, lng);
+  }
+
+  async componentDidMount() {
+    await this.getGeoLocationFromUser();
   }
   
 
@@ -52,7 +68,7 @@ export default class SearchBar extends Component {
 
     return (
       <div className="location-search-bar">
-        <form onSubmit={ (e) => {e.preventDefault();  getCoordinatesFromLocation(location)} }>
+        <form onSubmit={ (e) => {e.preventDefault(); this.submitCitySearch()} }>
           <input
             name="location"
             placeholder="Digite a cidade"
@@ -71,3 +87,9 @@ export default class SearchBar extends Component {
     )
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchForecast: (latitude, longitude) => dispatch(dispatchGetForecast(latitude, longitude))
+});
+
+export default connect(null, mapDispatchToProps)(SearchBar)

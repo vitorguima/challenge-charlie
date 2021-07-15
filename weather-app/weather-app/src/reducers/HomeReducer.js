@@ -1,4 +1,4 @@
-import { REQUEST_API_START, GET_RESPONSE, REQUEST_API_FAIL } from '../actions';
+import { REQUEST_BACKGROUND, SUBMIT_BACKGROUND, REQUEST_API_FAIL } from '../actions';
 
 const INITIAL_STATE = {
   loading: false,
@@ -8,12 +8,12 @@ const INITIAL_STATE = {
 
 function HomeReducer(state = INITIAL_STATE, { type, loading, backgroundImage }) {
   switch (type) {
-    case REQUEST_API_START:
+    case REQUEST_BACKGROUND:
       return ({
         ...state,
         loading,
       });
-    case GET_RESPONSE:
+    case SUBMIT_BACKGROUND:
       return ({
         ...state,
         loading,

@@ -1,12 +1,18 @@
+import { REQUEST_FORECAST, SUBMIT_FORECAST } from '../actions/index';
+
 const INITIAL_STATE = {
   loading: false,
-  backgroundImage: '',
+  weatherForecast: {},
 };
 
 function WeatherCardReducer(state = INITIAL_STATE, action) {
-  switch (action.type) {
-    case 'NEW_ACTION':
-      return { state: action.state };
+  const { type, loading, weatherForecast } = action;
+
+  switch (type) {
+    case REQUEST_FORECAST:
+      return { ...state, loading };
+    case SUBMIT_FORECAST:
+      return { ...state, loading, weatherForecast};
     default:
       return state;
   }

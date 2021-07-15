@@ -1,24 +1,46 @@
 import getBackground from '../services/getBackground';
+import getWeatherForecast from '../services/getWeatherForecast';
 
-export const REQUEST_API_START = 'REQUEST_API';
-export const GET_RESPONSE = 'GET_RESPONSE';
+export const REQUEST_BACKGROUND = 'REQUEST_BACKGROUND';
+export const SUBMIT_BACKGROUND = 'SUBMIT_BACKGROUND';
 export const REQUEST_API_FAIL = 'REQUEST_API_FAIL';
+export const REQUEST_FORECAST = 'REQUEST_FORECAST';
+export const SUBMIT_FORECAST = 'SUBMIT_FORECAST';
 
-const requestAPI = () => ({ 
-  type: REQUEST_API_START,
+const requestBackground = () => ({ 
+  type: REQUEST_BACKGROUND,
   loading: true,
 });
 
-const getResponse = (response) => ({
-  type: GET_RESPONSE,
+const submitBackground = (response) => ({
+  type: SUBMIT_BACKGROUND,
   loading: false,
   backgroundImage: response,
 })
 
 export const dispatchGetBackground = () => {
   return (dispatch) => {
-    dispatch(requestAPI());
+    dispatch(requestBackground());
     return (getBackground()
-      .then((background) => dispatch(getResponse(background))))
+      .then((background) => dispatch(submitBackground(background))))
+  }
+}
+
+const requestForecast = () => ({
+  type: REQUEST_FORECAST,
+  loading: true,
+})
+
+const submitForecast = (forecast) => ({
+  type: SUBMIT_FORECAST,
+  loading: false,
+  weatherForecast: forecast,
+})
+
+export const dispatchGetForecast = (latitude, longitude) => {
+  return (dispatch) => {
+    dispatch(requestForecast());
+    return (getWeatherForecast(latitude, longitude))
+      .then((forecast) => dispatch(submitForecast(forecast)))
   }
 }
