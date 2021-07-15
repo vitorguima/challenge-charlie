@@ -77,11 +77,6 @@ class SearchBar extends Component {
             onChange={ this.handleSearch }
             className="city-search-bar"
           />
-          {/* <button
-            type="button"
-          >
-            Buscar
-          </button> */}
         </form>
       </div>
     )

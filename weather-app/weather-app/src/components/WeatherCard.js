@@ -5,11 +5,20 @@ import '../styles/WeatherCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from './SearchBar';
+import { connect } from 'react-redux';
 
 // criar componente para cada container: today, tomorrow, after-tomorrow;
 
-export default class WeatherCard extends Component {
+class WeatherCard extends Component {
+  componentDidMount() {
+    const { weatherForecast } = this.props;
+
+    console.log('tempratura', weatherForecast.current.temp);
+    console.log(weatherForecast.current);
+  }
+
   render() {
+    const { weatherForecast } = this.props;
     return (
       <div className="weather-card-wrapper cold-weather">
         <SearchBar />
@@ -19,8 +28,8 @@ export default class WeatherCard extends Component {
           </div>
           <div className="today-infos-wrapper">
             <h2>HOJE</h2>
-            <p>32ºC</p>
-            <h2>Ensolarado</h2>
+            <p>{`${weatherForecast.current.temp.toFixed(0)} ºC`}</p>
+            <p>Ensolarado</p>
             <p>Ventro: x y z</p>
             <p>Humidadae: x%</p>
             <p>Pressão: x PA</p>
@@ -38,3 +47,9 @@ export default class WeatherCard extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  weatherForecast: state.WeatherCardReducer.weatherForecast,
+});
+
+export default connect(mapStateToProps)(WeatherCard)
