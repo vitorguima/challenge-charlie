@@ -12,9 +12,16 @@ import { connect } from 'react-redux';
 class WeatherCard extends Component {
   componentDidMount() {
     const { weatherForecast } = this.props;
+    if (weatherForecast) {
+      console.log('tempratura', weatherForecast.current.temp);
+      console.log('clima', weatherForecast.current.weather[0].description);
+      console.log(this.getCardinalDirection(weatherForecast.current.wind_deg));
+    };
+  }
 
-    console.log('tempratura', weatherForecast.current.temp);
-    console.log(weatherForecast.current);
+  getCardinalDirection(angle) {
+    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+    return directions[Math.round(angle / 45) % 8];
   }
 
   render() {
@@ -28,10 +35,10 @@ class WeatherCard extends Component {
           </div>
           <div className="today-infos-wrapper">
             <h2>HOJE</h2>
-            <p>{`${weatherForecast.current.temp.toFixed(0)} ºC`}</p>
-            <p>Ensolarado</p>
-            <p>Ventro: x y z</p>
-            <p>Humidadae: x%</p>
+            {weatherForecast ? <p>{`${weatherForecast.current.temp.toFixed(0)} ºC`}</p> : null}
+            {weatherForecast ? <p>{weatherForecast.current.weather[0].description}</p> : null}
+            <p>Vento: x y z</p>
+            <p>Humidadade: x%</p>
             <p>Pressão: x PA</p>
           </div>
         </div>

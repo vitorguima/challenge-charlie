@@ -33,6 +33,11 @@ class SearchBar extends Component {
     }))
   }
 
+  // const geolocation = await getGeoLocation();
+  // const location = await getCoordinates(geolocation);
+
+  // dividir getGeoLocationFromUser em 2 partes: primeira "get coordenadas pelo browser" / 2a getLocationFromCoordinates + setState + dispatchForecast;
+
   getGeoLocationFromUser() {
     const { dispatchForecast } = this.props
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -61,7 +66,6 @@ class SearchBar extends Component {
   async componentDidMount() {
     await this.getGeoLocationFromUser();
   }
-  
 
   render() {
     const { location } = this.state;

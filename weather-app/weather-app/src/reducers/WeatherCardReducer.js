@@ -2,7 +2,7 @@ import { REQUEST_FORECAST, SUBMIT_FORECAST } from '../actions/index';
 
 const INITIAL_STATE = {
   loading: false,
-  weatherForecast: {},
+  weatherForecast: false,
 };
 
 function WeatherCardReducer(state = INITIAL_STATE, action) {
