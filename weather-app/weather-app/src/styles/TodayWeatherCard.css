@@ -1,0 +1,21 @@
+.today-weather-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  color: rgb(245, 245, 245);
+}
+
+.today-hot-climate {
+  background-color: rgba(255, 0, 0, 0.7);
+  color: #fff;
+}
+
+.today-regular-climate {
+  background-color: rgb(255, 238, 0, 0.7);
+  color: rgb(0, 0, 0);
+}
+
+.today-cold-climate {
+  background-color: rgba(67, 192, 250, 0.7);
+  color: #fff;
+}

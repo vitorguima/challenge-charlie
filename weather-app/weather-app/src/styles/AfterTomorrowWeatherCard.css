@@ -1,0 +1,21 @@
+.after-tomorrow-weather-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+}
+
+.after-tomorrow-hot-climate {
+  background-color: rgba(177, 7, 7, 0.9);
+  color: #fff;
+}
+
+.after-tomorrow-regular-climate {
+  background-color: rgba(196, 183, 3, 0.9);
+  color: rgb(0, 0, 0);
+}
+
+.after-tomorrow-cold-climate {
+  background-color: rgba(18, 137, 192, 0.9);
+  color: #fff;
+}

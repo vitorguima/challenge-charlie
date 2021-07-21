@@ -54,6 +54,15 @@ class SearchBar extends Component {
     })
   }
 
+  async getGeoLocationFromBrowser() {
+    await navigator.geolocation.getCurrentPosition(({ coords }) => {
+      this.setState(() => ({
+        latitude: coords.latitude.toFixed(6),
+        longitude: coords.longitude.toFixed(6),
+      })
+    )});
+  }
+
   async submitCitySearch() {
     const { location } = this.state;
     const { dispatchForecast } = this.props;

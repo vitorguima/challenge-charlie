@@ -5,36 +5,67 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
 
+import '../styles/TodayWeatherCard.css';
+
 class TodayWeatherCard extends Component {
-  componentDidMount() {
+  setBackgroundColorToCard() {
     const { weatherForecast } = this.props;
-    
-    console.log('tempratura', weatherForecast.current.temp);
-    console.log('clima', weatherForecast.current.weather[0].description);
-    console.log(this.getCardinalDirection(weatherForecast.current.wind_deg));
+    const currentTemperature = Number(weatherForecast.current.temp.toFixed(0));
+    const hotClimateParam = 35;
+    const coldClimateParam = 15;
+    if (currentTemperature >= hotClimateParam) {
+      return 'today-hot-climate';
+    }
+
+    if (currentTemperature <= coldClimateParam) {
+      return 'today-cold-climate';
+    }
+
+    return 'today-regular-climate';
   }
 
-  getCardinalDirection(angle) {
-    const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
-    return directions[Math.round(angle / 45) % 8];
+  climateToUpperCase() {
+    const { weatherForecast } = this.props;
+    const climateName = weatherForecast.current.weather[0].description;
+    return climateName.charAt(0).toUpperCase() + climateName.slice(1)
+  }
+
+  windCardinalDirection() {
+    const { weatherForecast } = this.props;
+    const windAngle = weatherForecast.current.wind_deg;
+    const directions = ['↑ N', '↗ NE', '→ L', '↘ SE', '↓ S', '↙ SO', '← O', '↖ NO'];
+    return directions[Math.round(windAngle / 45) % 8];
+  }
+
+  convertWindSpeed() {
+    const { weatherForecast } = this.props;
+    const conversionRate = 3.6;
+    const windSpeedInMeters = weatherForecast.current.wind_speed;
+    const windSpeedInKilometers = windSpeedInMeters * conversionRate;
+    return `${windSpeedInKilometers.toFixed(2)} Km/h`;
   }
 
   render() {
     const { weatherForecast } = this.props;
+    const { current } = weatherForecast;
     return (
-      <div className="today-weather-wrapper">
+      <div className={ `today-weather-wrapper ${this.setBackgroundColorToCard()}` }>
       <div className="today-icon-wrapper">
-      <FontAwesomeIcon icon={ faSun } />
+      <img
+        src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
+        alt={`climate-${weatherForecast.current.weather[0].main}`}
+      />
       </div>
       <div className="today-infos-wrapper">
         <h2>HOJE</h2>
-        {weatherForecast ? <p>{`${weatherForecast.current.temp.toFixed(0)} ºC`}</p> : null}
-        {weatherForecast ? <p>{weatherForecast.current.weather[0].description}</p> : null}
-        <p>Vento: x y z</p>
-        <p>Humidadade: x%</p>
-        <p>Pressão: x PA</p>
+        { <p>{ `${current.temp.toFixed(0)} ºC` }</p> }
+        { <p>{ this.climateToUpperCase() }</p> }
+        <p>Vento: { `${this.windCardinalDirection()} ${this.convertWindSpeed()}` }</p>
+        <p>Humidadade: { current.humidity }%</p>
+        <p>Pressão: { current.pressure } hPA</p>
       </div>
-    </div>
+      {/* <img src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`} /> */}
+      </div>
     )
   }
 }
