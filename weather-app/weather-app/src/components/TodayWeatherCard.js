@@ -50,21 +50,20 @@ class TodayWeatherCard extends Component {
     const { current } = weatherForecast;
     return (
       <div className={ `today-weather-wrapper ${this.setBackgroundColorToCard()}` }>
-      <div className="today-icon-wrapper">
-      <img
-        src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
-        alt={`climate-${weatherForecast.current.weather[0].main}`}
-      />
-      </div>
-      <div className="today-infos-wrapper">
-        <h2>HOJE</h2>
-        { <p>{ `${current.temp.toFixed(0)} ºC` }</p> }
-        { <p>{ this.climateToUpperCase() }</p> }
-        <p>Vento: { `${this.windCardinalDirection()} ${this.convertWindSpeed()}` }</p>
-        <p>Humidadade: { current.humidity }%</p>
-        <p>Pressão: { current.pressure } hPA</p>
-      </div>
-      {/* <img src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`} /> */}
+        <div className="today-icon-wrapper">
+        <img
+          src={`http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`}
+          alt={`climate-${weatherForecast.current.weather[0].main}`}
+        />
+        </div>
+        <div className="today-infos-wrapper">
+          <h2>HOJE</h2>
+          { <p>{ `${current.temp.toFixed(0)} ºC` }</p> }
+          { <p>{ this.climateToUpperCase() }</p> }
+          <p>Vento: { `${this.windCardinalDirection()} ${this.convertWindSpeed()}` }</p>
+          <p>Humidadade: { current.humidity }%</p>
+          <p>Pressão: { current.pressure } hPA</p>
+        </div>
       </div>
     )
   }
