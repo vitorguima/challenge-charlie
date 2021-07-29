@@ -6,13 +6,14 @@ export const SUBMIT_BACKGROUND = 'SUBMIT_BACKGROUND';
 export const REQUEST_API_FAIL = 'REQUEST_API_FAIL';
 export const REQUEST_FORECAST = 'REQUEST_FORECAST';
 export const SUBMIT_FORECAST = 'SUBMIT_FORECAST';
+export const CHANGE_UNIT = 'CHANGE_UNIT';
 
-const requestBackground = () => ({ 
+export const requestBackground = () => ({ 
   type: REQUEST_BACKGROUND,
   loading: true,
 });
 
-const submitBackground = (response) => ({
+export const submitBackground = (response) => ({
   type: SUBMIT_BACKGROUND,
   loading: false,
   backgroundImage: response,
@@ -26,12 +27,12 @@ export const dispatchGetBackground = () => {
   }
 }
 
-const requestForecast = () => ({
+export const requestForecast = () => ({
   type: REQUEST_FORECAST,
   loading: true,
 })
 
-const submitForecast = (forecast) => ({
+export const submitForecast = (forecast) => ({
   type: SUBMIT_FORECAST,
   loading: false,
   weatherForecast: forecast,
@@ -44,3 +45,8 @@ export const dispatchGetForecast = (latitude, longitude) => {
       .then((forecast) => dispatch(submitForecast(forecast)))
   }
 }
+
+export const changeTemperatureUnit = (newUnit) => ({
+  type: CHANGE_UNIT,
+  temperatureUnit: newUnit,
+})

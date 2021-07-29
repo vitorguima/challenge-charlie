@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import { changeTemperatureUnit } from '../actions/index';
+
 import '../styles/AfterTomorrowWeatherCard.css';
 
 class AfterTomorrowWeatherCard extends Component {
-  componentDidMount() {
-    const { weatherForecast } = this.props;
-    
-    console.log('clima', weatherForecast.daily);
-  }
-
   setBackgroundColorToCard() {
     const { weatherForecast } = this.props;
     const tomorrowTemperature = Number(weatherForecast.daily[0].temp.day.toFixed(0));
@@ -27,12 +23,40 @@ class AfterTomorrowWeatherCard extends Component {
     return 'after-tomorrow-regular-climate';
   }
 
+  temperatureUnitConvert() {
+    const {
+      temperatureUnit,
+      weatherForecast,
+      changeUnit
+    } = this.props;
+
+    if (temperatureUnit && weatherForecast) {
+      return(
+        <p
+          onClick={() => changeUnit(!temperatureUnit)}
+        >
+          {`${weatherForecast.daily[1].temp.day.toFixed(0)} ºC`}
+        </p>
+      )
+    }
+
+    if (!temperatureUnit && weatherForecast) {
+      const temperatureToFarenheit = (weatherForecast.daily[1].temp.day * 1.8) + 32;
+      return (
+        <p
+          onClick={() => changeUnit(!temperatureUnit)}
+        >
+          {`${temperatureToFarenheit.toFixed(0)} º F`}
+        </p>
+      )
+    }
+  }
+
   render() {
-    const { weatherForecast } = this.props;
     return (
       <div className={ `after-tomorrow-weather-wrapper ${this.setBackgroundColorToCard()}` }>
         <h2>Depois de amanhã</h2>
-        <p>{weatherForecast.daily[1].temp.day.toFixed(0)} ºC</p>
+        {this.temperatureUnitConvert()}
       </div>
     )
   }
@@ -40,6 +64,11 @@ class AfterTomorrowWeatherCard extends Component {
 
 const mapStateToProps = (state) => ({
   weatherForecast: state.WeatherCardReducer.weatherForecast,
+  temperatureUnit: state.WeatherCardReducer.temperatureUnit,
 });
 
-export default connect(mapStateToProps)(AfterTomorrowWeatherCard);
+const mapDispatchToProps = (dispatch) => ({
+  changeUnit: (unit) => dispatch(changeTemperatureUnit(unit))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AfterTomorrowWeatherCard);

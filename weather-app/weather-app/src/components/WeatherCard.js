@@ -8,8 +8,6 @@ import TodayWeatherCard from './TodayWeatherCard';
 import TomorrowWeatherCard from './TomorrowWeatherCard';
 import AfterTomorrowWeatherCard from './AfterTomorrowWeatherCard';
 
-// criar componente para cada container: today, tomorrow, after-tomorrow;
-
 class WeatherCard extends Component {
   render() {
     const { weatherForecast } = this.props;

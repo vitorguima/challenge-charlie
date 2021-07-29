@@ -9,4 +9,3 @@ const getBackground = async () => {
 }
 
 export default getBackground;
-

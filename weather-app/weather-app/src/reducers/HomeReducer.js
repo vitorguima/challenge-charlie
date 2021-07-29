@@ -1,4 +1,4 @@
-import { REQUEST_BACKGROUND, SUBMIT_BACKGROUND, REQUEST_API_FAIL } from '../actions';
+import { REQUEST_BACKGROUND, SUBMIT_BACKGROUND } from '../actions';
 
 const INITIAL_STATE = {
   loading: false,
